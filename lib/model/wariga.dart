@@ -1,5 +1,16 @@
 class Wariga {
-  List<Map<String, dynamic>> pancawara = [
+  String pancawara;
+  String saptawara;
+  String sasih;
+  String tanggal;
+  Wariga({
+    this.pancawara,
+    this.saptawara,
+    this.sasih,
+    this.tanggal,
+  });
+
+  List<Map<String, dynamic>> _pancawara_data = [
     {'nama': 'Umanis-Iswara', 'urip': 5},
     {'nama': 'Paing-Yama', 'urip': 9},
     {'nama': 'Pon-Mahadewa', 'urip': 7},
@@ -7,7 +18,7 @@ class Wariga {
     {'nama': 'Kliwon-Siwa', 'urip': 9},
   ];
 
-  List<Map<String, dynamic>> saptawara = [
+  List<Map<String, dynamic>> _saptawara_data = [
     {'nama': 'Sukra', 'urip': 6},
     {'nama': 'Redite', 'urip': 5},
     {'nama': 'Wrspati', 'urip': 8},
@@ -16,7 +27,7 @@ class Wariga {
     {'nama': 'Budha', 'urip': 7},
   ];
 
-  List<Map<String, dynamic>> sasih = [
+  List<Map<String, dynamic>> _sasih_data = [
     {'nama': 'Kasa', 'urip': 5},
     {'nama': 'Karo', 'urip': 5},
     {'nama': 'Katiga', 'urip': 5},
@@ -31,7 +42,7 @@ class Wariga {
     {'nama': 'Sada', 'urip': 4},
   ];
 
-  List<Map<String, dynamic>> tanggal = [
+  List<Map<String, dynamic>> _tanggal_data = [
     {'nama': '1', 'urip': 5},
     {'nama': '2', 'urip': 1},
     {'nama': '3', 'urip': 4},
@@ -48,4 +59,25 @@ class Wariga {
     {'nama': '14', 'urip': 8},
     {'nama': '15', 'urip': 9},
   ];
+
+  List<Map<String, dynamic>> get getPancawaraData {
+    return _pancawara_data;
+  }
+
+  List<Map<String, dynamic>> get getSaptawaraData {
+    return _saptawara_data;
+  }
+
+  List<Map<String, dynamic>> get getSasihData {
+    return _sasih_data;
+  }
+
+  List<Map<String, dynamic>> get getTanggalData {
+    return _tanggal_data;
+  }
+
+  void cariDewasa() {
+    final item = _pancawara_data.firstWhere((e) => e['nama'] == pancawara);
+    print(item['nama']);
+  }
 }
