@@ -20,92 +20,251 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.blue,
       ),
-      home: MyHomePage(title: 'Flutter Demo Home Page'),
+      home: WarigaGemetScreen(),
     );
   }
 }
 
-class MyHomePage extends StatefulWidget {
-  MyHomePage({Key key, this.title}) : super(key: key);
-
-  // This widget is the home page of your application. It is stateful, meaning
-  // that it has a State object (defined below) that contains fields that affect
-  // how it looks.
-
-  // This class is the configuration for the state. It holds the values (in this
-  // case the title) provided by the parent (in this case the App widget) and
-  // used by the build method of the State. Fields in a Widget subclass are
-  // always marked "final".
-
-  final String title;
-
+class WarigaGemetScreen extends StatefulWidget {
   @override
-  _MyHomePageState createState() => _MyHomePageState();
+  _WarigaGemetScreenState createState() => _WarigaGemetScreenState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      // This call to setState tells the Flutter framework that something has
-      // changed in this State, which causes it to rerun the build method below
-      // so that the display can reflect the updated values. If we changed
-      // _counter without calling setState(), then the build method would not be
-      // called again, and so nothing would appear to happen.
-      _counter++;
-    });
-  }
+class _WarigaGemetScreenState extends State<WarigaGemetScreen> {
+  String dropdownValue = 'One';
 
   @override
   Widget build(BuildContext context) {
-    // This method is rerun every time setState is called, for instance as done
-    // by the _incrementCounter method above.
-    //
-    // The Flutter framework has been optimized to make rerunning build methods
-    // fast, so that you can just rebuild anything that needs updating rather
-    // than having to individually change instances of widgets.
     return Scaffold(
-      appBar: AppBar(
-        // Here we take the value from the MyHomePage object that was created by
-        // the App.build method, and use it to set our appbar title.
-        title: Text(widget.title),
-      ),
-      body: Center(
-        // Center is a layout widget. It takes a single child and positions it
-        // in the middle of the parent.
-        child: Column(
-          // Column is also a layout widget. It takes a list of children and
-          // arranges them vertically. By default, it sizes itself to fit its
-          // children horizontally, and tries to be as tall as its parent.
-          //
-          // Invoke "debug painting" (press "p" in the console, choose the
-          // "Toggle Debug Paint" action from the Flutter Inspector in Android
-          // Studio, or the "Toggle Debug Paint" command in Visual Studio Code)
-          // to see the wireframe for each widget.
-          //
-          // Column has various properties to control how it sizes itself and
-          // how it positions its children. Here we use mainAxisAlignment to
-          // center the children vertically; the main axis here is the vertical
-          // axis because Columns are vertical (the cross axis would be
-          // horizontal).
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Text(
-              'You have pushed the button this many times:',
-            ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.display1,
-            ),
-          ],
+        floatingActionButton: FloatingActionButton(
+          backgroundColor: Colors.lightBlueAccent,
+          child: Icon(Icons.add),
+          onPressed: () {
+            showModalBottomSheet(
+              context: context,
+              builder: (context) => SearchWarigaScreen(),
+            );
+          },
         ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: Icon(Icons.add),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
+        body: SafeArea(
+          child: Column(
+            children: <Widget>[
+              DropdownButton<String>(
+                value: dropdownValue,
+                icon: Icon(Icons.arrow_downward),
+                iconSize: 24,
+                elevation: 16,
+                style: TextStyle(color: Colors.deepPurple),
+                underline: Container(
+                  height: 2,
+                  color: Colors.deepPurpleAccent,
+                ),
+                onChanged: (String newValue) {
+                  setState(() {
+                    dropdownValue = newValue;
+                  });
+                },
+                items: <String>['One', 'Two', 'Free', 'Four']
+                    .map<DropdownMenuItem<String>>((String value) {
+                  return DropdownMenuItem<String>(
+                    value: value,
+                    child: Text(value),
+                  );
+                }).toList(),
+              )
+            ],
+          ),
+        ));
+  }
+}
+
+class SearchWarigaScreen extends StatefulWidget {
+  @override
+  _SearchWarigaScreenState createState() => _SearchWarigaScreenState();
+}
+
+class _SearchWarigaScreenState extends State<SearchWarigaScreen> {
+  String pancawaraValue = 'Umanis-Iswara';
+  String saptawaraValue = 'Sukra';
+  String sasihValue = 'Kasa';
+  String tanggalValue = '1';
+  List<Map<String, dynamic>> pancawara = [
+    {'nama': 'Umanis-Iswara', 'urip': 5},
+    {'nama': 'Paing-Yama', 'urip': 9},
+    {'nama': 'Pon-Mahadewa', 'urip': 7},
+    {'nama': 'Wage-Wisnu', 'urip': 4},
+    {'nama': 'Kliwon-Siwa', 'urip': 9},
+  ];
+
+  List<Map<String, dynamic>> saptawara = [
+    {'nama': 'Sukra', 'urip': 6},
+    {'nama': 'Redite', 'urip': 5},
+    {'nama': 'Wrspati', 'urip': 8},
+    {'nama': 'Saniscara', 'urip': 9},
+    {'nama': 'Anggara', 'urip': 3},
+    {'nama': 'Budha', 'urip': 7},
+  ];
+
+  List<Map<String, dynamic>> sasih = [
+    {'nama': 'Kasa', 'urip': 5},
+    {'nama': 'Karo', 'urip': 5},
+    {'nama': 'Katiga', 'urip': 5},
+    {'nama': 'Kapat', 'urip': 9},
+    {'nama': 'Kalima', 'urip': 9},
+    {'nama': 'Kanam', 'urip': 9},
+    {'nama': 'Kapitu', 'urip': 7},
+    {'nama': 'Kaulu', 'urip': 7},
+    {'nama': 'Kasanga', 'urip': 7},
+    {'nama': 'Kadasa', 'urip': 4},
+    {'nama': 'Desta', 'urip': 4},
+    {'nama': 'Sada', 'urip': 4},
+  ];
+
+  List<Map<String, dynamic>> tanggal = [
+    {'nama': '1', 'urip': 5},
+    {'nama': '2', 'urip': 1},
+    {'nama': '3', 'urip': 4},
+    {'nama': '4', 'urip': 6},
+    {'nama': '5', 'urip': 5},
+    {'nama': '6', 'urip': 8},
+    {'nama': '7', 'urip': 9},
+    {'nama': '8', 'urip': 3},
+    {'nama': '9', 'urip': 7},
+    {'nama': '10', 'urip': 1},
+    {'nama': '11', 'urip': 4},
+    {'nama': '12', 'urip': 6},
+    {'nama': '13', 'urip': 5},
+    {'nama': '14', 'urip': 8},
+    {'nama': '15', 'urip': 9},
+  ];
+
+  @override
+  Widget build(BuildContext context) {
+    return ListView(
+      children: <Widget>[
+        Padding(
+          padding: const EdgeInsets.all(15),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              Text('Pancawara'),
+              DropdownButton<String>(
+                isExpanded: true,
+                value: pancawaraValue,
+                icon: Icon(Icons.arrow_downward),
+                iconSize: 24,
+                elevation: 16,
+                style: TextStyle(color: Colors.deepPurple),
+                underline: Container(
+                  height: 2,
+                  color: Colors.deepPurpleAccent,
+                ),
+                onChanged: (newValue) {
+                  setState(() {
+                    pancawaraValue = newValue;
+                  });
+                },
+                items: pancawara.map<DropdownMenuItem<String>>((value) {
+                  return DropdownMenuItem<String>(
+                    value: value['nama'],
+                    child: Text(value['nama']),
+                  );
+                }).toList(),
+              ),
+              SizedBox(height: 20),
+              Text('Saptawara'),
+              DropdownButton<String>(
+                isExpanded: true,
+                value: saptawaraValue,
+                icon: Icon(Icons.arrow_downward),
+                iconSize: 24,
+                elevation: 16,
+                style: TextStyle(color: Colors.deepPurple),
+                underline: Container(
+                  height: 2,
+                  color: Colors.deepPurpleAccent,
+                ),
+                onChanged: (newValue) {
+                  setState(() {
+                    saptawaraValue = newValue;
+                  });
+                },
+                items: saptawara.map<DropdownMenuItem<String>>((value) {
+                  return DropdownMenuItem<String>(
+                    value: value['nama'],
+                    child: Text(value['nama']),
+                  );
+                }).toList(),
+              ),
+              SizedBox(height: 20),
+              Text('Sasih'),
+              DropdownButton<String>(
+                isExpanded: true,
+                value: sasihValue,
+                icon: Icon(Icons.arrow_downward),
+                iconSize: 24,
+                elevation: 16,
+                style: TextStyle(color: Colors.deepPurple),
+                underline: Container(
+                  height: 2,
+                  color: Colors.deepPurpleAccent,
+                ),
+                onChanged: (newValue) {
+                  setState(() {
+                    sasihValue = newValue;
+                  });
+                },
+                items: sasih.map<DropdownMenuItem<String>>((value) {
+                  return DropdownMenuItem<String>(
+                    value: value['nama'],
+                    child: Text(value['nama']),
+                  );
+                }).toList(),
+              ),
+              SizedBox(height: 20),
+              Text('Tanggal'),
+              DropdownButton<String>(
+                isExpanded: true,
+                value: tanggalValue,
+                icon: Icon(Icons.arrow_downward),
+                iconSize: 24,
+                elevation: 16,
+                style: TextStyle(color: Colors.deepPurple),
+                underline: Container(
+                  height: 2,
+                  color: Colors.deepPurpleAccent,
+                ),
+                onChanged: (newValue) {
+                  setState(() {
+                    tanggalValue = newValue;
+                  });
+                },
+                items: tanggal.map<DropdownMenuItem<String>>((value) {
+                  return DropdownMenuItem<String>(
+                    value: value['nama'],
+                    child: Text(value['nama']),
+                  );
+                }).toList(),
+              ),
+              SizedBox(height: 20),
+              Row(
+                children: <Widget>[
+                  Expanded(
+                    child: FlatButton(
+                      onPressed: () {},
+                      child: Text(
+                        'Cari',
+                        style: TextStyle(color: Colors.white),
+                      ),
+                      color: Colors.deepPurple,
+                    ),
+                  ),
+                ],
+              )
+            ],
+          ),
+        ),
+      ],
     );
   }
 }
