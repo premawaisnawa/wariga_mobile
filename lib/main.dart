@@ -33,8 +33,6 @@ class WarigaGemetScreen extends StatefulWidget {
 }
 
 class _WarigaGemetScreenState extends State<WarigaGemetScreen> {
-  String dropdownValue = 'One';
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -50,31 +48,7 @@ class _WarigaGemetScreenState extends State<WarigaGemetScreen> {
         ),
         body: SafeArea(
           child: Column(
-            children: <Widget>[
-              DropdownButton<String>(
-                value: dropdownValue,
-                icon: Icon(Icons.arrow_downward),
-                iconSize: 24,
-                elevation: 16,
-                style: TextStyle(color: Colors.deepPurple),
-                underline: Container(
-                  height: 2,
-                  color: Colors.deepPurpleAccent,
-                ),
-                onChanged: (String newValue) {
-                  setState(() {
-                    dropdownValue = newValue;
-                  });
-                },
-                items: <String>['One', 'Two', 'Free', 'Four']
-                    .map<DropdownMenuItem<String>>((String value) {
-                  return DropdownMenuItem<String>(
-                    value: value,
-                    child: Text(value),
-                  );
-                }).toList(),
-              )
-            ],
+            children: <Widget>[],
           ),
         ));
   }
@@ -211,7 +185,14 @@ class _SearchWarigaScreenState extends State<SearchWarigaScreen> {
                 children: <Widget>[
                   Expanded(
                     child: FlatButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        Wariga(
+                          pancawara: pancawaraValue,
+                          saptawara: saptawaraValue,
+                          sasih: sasihValue,
+                          tanggal: tanggalValue,
+                        ).cariDewasa();
+                      },
                       child: Text(
                         'Cari',
                         style: TextStyle(color: Colors.white),
